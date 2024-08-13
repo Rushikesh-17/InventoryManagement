@@ -13,5 +13,4 @@ public interface RecordDAO {
     boolean delete(int id);
     boolean addOrUpdate(Record record);
 
-
 }

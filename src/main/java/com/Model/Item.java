@@ -20,6 +20,10 @@ public class Item {
 		super();
 	}
 	
+	public Item(String name) {
+		this.name = name;
+	}
+	
 	
 	
 	public Item(String name, String measure, String category) {

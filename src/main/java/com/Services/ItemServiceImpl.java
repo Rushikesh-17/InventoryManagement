@@ -22,9 +22,6 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public Item getItemById(int id) {
-		if (id <= 0) {
-			return null;
-		}
 		return itemDAO.getById(id);
 	}
 

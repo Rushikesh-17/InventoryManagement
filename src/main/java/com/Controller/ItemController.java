@@ -15,7 +15,11 @@ import com.Services.ItemServiceImpl;
 
 @WebServlet("/items/*")
 public class ItemController extends HttpServlet {
-    private ItemService itemService = new ItemServiceImpl();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ItemService itemService = new ItemServiceImpl();
     
     @Override
     public void init() throws ServletException {

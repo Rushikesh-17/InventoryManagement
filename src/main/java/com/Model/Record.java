@@ -1,6 +1,8 @@
 package com.Model;
 
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -21,7 +23,7 @@ public class Record {
 	private String action;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date date;
+	private Date date = Date.from(Instant.now());
 	
 	
 
@@ -29,14 +31,22 @@ public class Record {
 		super();
 	}
 
-	public Record(int recordId, String user, Item item, int usedQuantity, String action, Date date) {
+	public Record(int recordId, String user, Item item, int usedQuantity, String action) {
 		super();
 		this.recordId = recordId;
 		this.user = user;
 		this.item = item;
 		this.usedQuantity = usedQuantity;
 		this.action = action;
-		this.date = date;
+	}
+	
+
+	public Record(String user, Item item, int usedQuantity, String action) {
+		super();
+		this.user = user;
+		this.item = item;
+		this.usedQuantity = usedQuantity;
+		this.action = action;
 	}
 
 	public int getRecordId() {
