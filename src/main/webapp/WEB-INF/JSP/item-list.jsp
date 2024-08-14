@@ -7,50 +7,49 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-    <title>Item Management Application</title>
+<title>Inventory Management Application</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
 
-<style>
-table {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-th, td {
-	border: 1px solid black;
-	padding: 8px;
-	text-align: left;
-}
-</style>
 </head>
 <body>
-	<h1>Item Management</h1>
-    <h2>
-        <a href="new">Add New Item</a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="list">List All Items</a>
-    </h2>
-	<table>
-		<tr>
-			<th>Item ID</th>
-			<th>Name</th>
-			<th>Quantity</th>
-			<th>Actions</th>
-		</tr>
+	<div class="container mt-5">
+		<h2 class="mb-4">Item Management</h2>
+		<table class="table table-striped table-hover">
+			<thead class="table-dark">
+				<tr>
+					<th>Item ID</th>
+					<th>Name</th>
+					<th>Quantity</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+				List<Item> itemList = (List<Item>) request.getAttribute("listItem");
+				for (Item i : itemList) {
+					String editlink = "edit?id=" + i.getId();
+					String deletelink = "delete?id=" + i.getId();
+				%>
+				<tr>
+					<td><%=i.getId()%></td>
+					<td><%=i.getName()%></td>
+					<td><%=i.getQuantity()%></td>
+					<td><a href=<%=editlink%>>Edit</a><br> +"<a
+						href=<%=deletelink%>>Delete</a></td>
+				</tr>
+				<%
+				}
+				%>
+			</tbody>
+		</table>
+		<h4>
+			<a href="new">Add New Item</a>
+		</h4>
+	</div>
 
-		<%
-		List<Item> itemList = (List<Item>) request.getAttribute("listItem");
-		for (Item i : itemList) {
-			out.println("<tr>");
-			out.println("<td>" + i.getId() + "</td>");
-			out.println("<td>" + i.getName() + "</td>");
-			out.println("<td>" + i.getQuantity() + "</td>");
-			
-			out.println("<td> <a href='edit?id="+i.getId()+"'>Edit</a><br>"
-					   +"<a href='delete?id="+i.getId()+"'>Delete</a></td>");
-			out.println("</tr>");
-		}
-		%>
-	</table>
-	
 </body>
 </html>

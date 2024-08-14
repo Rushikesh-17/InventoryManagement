@@ -2,7 +2,7 @@ package com.Model;
 
 
 import java.time.Instant;
-import java.time.LocalDateTime;
+
 import java.util.Date;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ public class Record {
 	
 	private String user;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Item item;
 	
 	private int usedQuantity;

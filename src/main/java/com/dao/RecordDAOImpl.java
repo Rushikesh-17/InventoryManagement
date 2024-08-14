@@ -32,6 +32,12 @@ public class RecordDAOImpl implements RecordDAO {
 				return false;
 			}
 			else {
+				if(record.getAction().equals("added")) {
+					item.setQuantity(item.getQuantity()+record.getUsedQuantity());
+				}
+				else if(record.getAction().equals("used")) {
+					item.setQuantity(item.getQuantity()-record.getUsedQuantity());
+				}
 				record.setItem(item);
 			}
 			Session session = factory.openSession();

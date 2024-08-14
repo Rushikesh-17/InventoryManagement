@@ -1,7 +1,6 @@
 package com.Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,8 +31,8 @@ public class RecordController extends HttpServlet {
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		recordService.addRecord(new Record("Admin", new Item("Paper", "Bundle", "Stationary"), 10, "add"));
-		recordService.addRecord(new Record("Admin", new Item("Laptop", "Nos", "Assest"), 10, "add"));
+		recordService.addRecord(new Record("Admin", new Item("Paper", "Bundle", "Stationary"), 10, "added"));
+		recordService.addRecord(new Record("Admin", new Item("Laptop", "Nos", "Assest"), 15, "added"));
 		super.init();
 	}
 

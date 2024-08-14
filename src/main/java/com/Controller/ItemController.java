@@ -55,7 +55,7 @@ public class ItemController extends HttpServlet {
                     updateItem(request, response);
                     break;
                 default:
-                    listItems(request, response);
+                    listRecords(request, response);
                     break;
             }
         } catch (Exception ex) {
@@ -63,7 +63,7 @@ public class ItemController extends HttpServlet {
         }
     }
 
-    private void listItems(HttpServletRequest request, HttpServletResponse response)
+    private void listRecords(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         List<Item> listItem = itemService.getAllItems();
         request.setAttribute("listItem", listItem);
