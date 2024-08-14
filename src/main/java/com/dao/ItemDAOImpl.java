@@ -102,25 +102,7 @@ public class ItemDAOImpl implements ItemDAO {
 		}
 	}
 
-	@Override
-	public boolean delete(int id) {
-		Transaction transaction = null;
-		try {
-			Session session = factory.openSession();
-			Item i = getById(id);
-			transaction = session.beginTransaction();
-			session.delete(i);
-			transaction.commit();
-			session.close();
-			return true;
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			if (transaction != null)
-				transaction.rollback();
-			e.printStackTrace();
-			return false;
-		}
-	}
+
 
 	@Override
 	public boolean addOrUpdate(Item item) {

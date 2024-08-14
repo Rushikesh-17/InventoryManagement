@@ -16,9 +16,12 @@
 
 </head>
 <body>
+	<%@include file="navbar.jsp"  %>
+
+
 	<div class="container mt-5">
 		<h2 class="mb-4">Item Management</h2>
-		<table class="table table-striped table-hover">
+		<table class="table table-hover">
 			<thead class="table-dark">
 				<tr>
 					<th>Item ID</th>
@@ -32,14 +35,12 @@
 				List<Item> itemList = (List<Item>) request.getAttribute("listItem");
 				for (Item i : itemList) {
 					String editlink = "edit?id=" + i.getId();
-					String deletelink = "delete?id=" + i.getId();
 				%>
 				<tr>
 					<td><%=i.getId()%></td>
 					<td><%=i.getName()%></td>
 					<td><%=i.getQuantity()%></td>
-					<td><a href=<%=editlink%>>Edit</a><br> +"<a
-						href=<%=deletelink%>>Delete</a></td>
+					<td><a href=<%=editlink%>>Edit</a>
 				</tr>
 				<%
 				}

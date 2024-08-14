@@ -52,15 +52,6 @@ public class RecordController extends HttpServlet {
 			case "/insert":
 				insertRecord(request, response);
 				break;
-			case "/delete":
-				deleteRecord(request, response);
-				break;
-			case "/edit":
-				showEditForm(request, response);
-				break;
-			case "/update":
-				updateRecord(request, response);
-				break;
 			default:
 				listRecord(request, response);
 				break;
@@ -84,15 +75,6 @@ public class RecordController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		Record existingRecord = recordService.getRecordById(id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/record-form.jsp");
-		request.setAttribute("record", existingRecord);
-		dispatcher.forward(request, response);
-	}
-
 	private void insertRecord(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		String user = request.getParameter("user");
@@ -104,26 +86,6 @@ public class RecordController extends HttpServlet {
 		response.sendRedirect("list");
 	}
 
-	private void updateRecord(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-		int recordId = Integer.parseInt(request.getParameter("recordId"));
-		String user = request.getParameter("user");
-		String itemName = request.getParameter("itemName");
-		int usedQuantity = Integer.parseInt(request.getParameter("usedQuantity"));
-		String action = request.getParameter("action");
-		Record newRecord = new Record(recordId, user, new Item(itemName), usedQuantity, action);
-		recordService.addRecord(newRecord);
-		response.sendRedirect("list");
 
-	}
-
-	private void deleteRecord(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
-		int recordId = Integer.parseInt(request.getParameter("recordId"));
-		recordService.deleteRecord(recordId);
-		System.out.println("Delete Called");
-
-		response.sendRedirect("list");
-	}
 
 }

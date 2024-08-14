@@ -12,9 +12,7 @@ public interface RecordService {
 
 	List<Record> getAllRecords();
 
-	boolean updateRecord(Record record);
 
-	boolean deleteRecord(int id);
 
 
 }

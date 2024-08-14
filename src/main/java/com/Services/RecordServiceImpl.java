@@ -31,16 +31,5 @@ public class RecordServiceImpl implements RecordService{
 		return recordDAO.getAll();
 	}
 
-	@Override
-	public boolean updateRecord(Record record) {
-		// TODO Auto-generated method stub
-		return recordDAO.update(record);
-	}
-
-	@Override
-	public boolean deleteRecord(int id) {
-		// TODO Auto-generated method stub
-		return recordDAO.delete(id);
-	}
 
 }

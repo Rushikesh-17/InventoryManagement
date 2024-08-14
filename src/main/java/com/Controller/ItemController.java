@@ -45,9 +45,6 @@ public class ItemController extends HttpServlet {
                 case "/insert":
                     insertItem(request, response);
                     break;
-                case "/delete":
-                    deleteItem(request, response);
-                    break;
                 case "/edit":
                     showEditForm(request, response);
                     break;
@@ -113,12 +110,4 @@ public class ItemController extends HttpServlet {
 
     }
 
-    private void deleteItem(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        itemService.deleteItem(id);
-        System.out.println("Delete Called");
-
-        response.sendRedirect("list");
-    }
 }

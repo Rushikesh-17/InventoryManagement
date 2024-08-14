@@ -1,11 +1,11 @@
 <%@page import="com.Model.Record"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inventory Management Application</title>
 <!-- Bootstrap CSS -->
@@ -14,6 +14,8 @@
 	rel="stylesheet">
 </head>
 <body>
+	<%@include file="navbar.jsp"  %>
+
 	<div class="container mt-5">
 		<h2 class="mb-4">Records Management</h2>
 		<table class="table table-striped table-hover">
@@ -47,7 +49,7 @@
 			</tbody>
 		</table>
 		<h4>
-			<a href="new">Add New Record</a> 
+			<a href="records/new">Add New Record</a> 
 		</h4>
 	</div>
 

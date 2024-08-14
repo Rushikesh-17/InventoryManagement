@@ -9,7 +9,6 @@ public interface ItemDAO {
     Item getById(int id);
     List<Item> getAll();
     boolean update(Item item);
-    boolean delete(int id);
     boolean addOrUpdate(Item item);
 	Item getByName(String name);
 
