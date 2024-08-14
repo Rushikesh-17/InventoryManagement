@@ -24,5 +24,7 @@
  	     
  	    <!-- Names the annotated entity class -->
 		<mapping class="com.Model.Item" />
+		<mapping class="com.Model.Record" />
+		
     </session-factory>
 </hibernate-configuration>

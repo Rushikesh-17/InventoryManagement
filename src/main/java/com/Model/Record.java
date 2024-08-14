@@ -8,9 +8,11 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@SequenceGenerator(name="RECORD_SEQ", sequenceName="record_sequence")
 public class Record {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "RECORD_SEQ")
 	private int recordId;
 	
 	private String user;
@@ -95,6 +97,12 @@ public class Record {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	@Override
+	public String toString() {
+		return "Record [recordId=" + recordId + ", user=" + user + ", item=" + item + ", usedQuantity=" + usedQuantity
+				+ ", action=" + action + ", date=" + date + "]";
 	}
 	
 	

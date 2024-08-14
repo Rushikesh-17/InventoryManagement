@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 
 @Entity
+@SequenceGenerator(name="ITEM_SEQ", sequenceName="item_sequence")
 public class Item {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "ITEM_SEQ")
 	private int id;
 	private String name;
 	private int quantity;
@@ -102,6 +103,12 @@ public class Item {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", name=" + name + ", quantity=" + quantity + ", measure=" + measure + ", category="
+				+ category + "]";
 	}
 	
 	
