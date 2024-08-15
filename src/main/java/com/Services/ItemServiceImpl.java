@@ -38,7 +38,8 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public boolean deleteItem(int id) {
 		// TODO Auto-generated method stub
-		return itemDAO.delete(id);
+		return false;
 	}
+
 
 }

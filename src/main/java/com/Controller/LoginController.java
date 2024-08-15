@@ -23,21 +23,20 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        // Implement your authentication logic here
-        if ("admin".equals(username) && "admin".equals(password)) {
-            // User is valid, store in session
-            HttpSession session = request.getSession();
-            session.setAttribute("user", username);
-
-            // Redirect to ItemController
-            response.sendRedirect(request.getContextPath() + "/items/list");
-        } else {
-            // Invalid login, redirect back to login page
-            response.sendRedirect(request.getContextPath() + "/login.jsp?error=true");
-        }
+//
+//
+//        // Implement your authentication logic here
+//        if ("admin".equals(username) && "admin".equals(password)) {
+//            // User is valid, store in session
+//            HttpSession session = request.getSession();
+//            session.setAttribute("user", username);
+//
+//            // Redirect to ItemController
+//            response.sendRedirect(request.getContextPath() + "/items/list");
+//        } else {
+//            // Invalid login, redirect back to login page
+//            response.sendRedirect(request.getContextPath() + "/login.jsp?error=true");
+//        }
     }
 }
 
