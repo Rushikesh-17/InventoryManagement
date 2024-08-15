@@ -60,7 +60,7 @@ public class RecordController extends HttpServlet {
 			throw new ServletException(ex);
 		}
 	}
-
+	
 	private void listRecord(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<Record> listRecord = recordService.getAllRecords();
@@ -85,7 +85,4 @@ public class RecordController extends HttpServlet {
 		recordService.addRecord(newRecord);
 		response.sendRedirect("list");
 	}
-
-
-
 }
