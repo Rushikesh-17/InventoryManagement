@@ -127,14 +127,24 @@ public class RecordController extends HttpServlet {
 	}
 
 	private void insertRecord(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException {
+			throws SQLException, IOException, ServletException {
 		String user = request.getParameter("user");
 		String itemName = request.getParameter("itemName");
 		int usedQuantity = Integer.parseInt(request.getParameter("usedQuantity"));
 		String action = request.getParameter("action");
+			
 		Record newRecord = new Record(user, new Item(itemName), usedQuantity, action);
-		recordService.addRecord(newRecord);
-		response.sendRedirect("list");
+		
+		boolean isAdded = recordService.addRecord(newRecord);
+
+		if (isAdded) {
+			response.sendRedirect("list");
+		} else {
+			request.setAttribute("errorMessage", "Entered quantity exceeds available quantity.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/quantityError.jsp");
+			dispatcher.forward(request, response);
+		}
+		
 	}
 
 }

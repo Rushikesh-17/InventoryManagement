@@ -3,6 +3,9 @@ package com.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,18 +27,22 @@ public class RecordDAOImpl implements RecordDAO {
 	@Override
 	public boolean add(Record record) {
 		// TODO Auto-generated method stub
+		HttpServletRequest request;
+		HttpServletResponse response;
 		Transaction t = null;
 		Session session = factory.openSession();
 		try {
-
 			Item item = itemDAO.getByName(record.getItem().getName());
 			if (item == null) {
-				return false;
+				return false; // Item not found
 			} else {
-				if (record.getAction().equals("added")) {
-					item.setQuantity(item.getQuantity() + record.getUsedQuantity());
-				} else if (record.getAction().equals("used")) {
+				if (record.getAction().equals("used")) {
+					if (item.getQuantity() < record.getUsedQuantity()) {
+						return false;
+					}
 					item.setQuantity(item.getQuantity() - record.getUsedQuantity());
+				} else if (record.getAction().equals("added")) {
+					item.setQuantity(item.getQuantity() + record.getUsedQuantity());
 				}
 				record.setItem(item);
 			}
@@ -51,8 +58,7 @@ public class RecordDAOImpl implements RecordDAO {
 				t.rollback();
 			}
 			return false;
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -74,8 +80,7 @@ public class RecordDAOImpl implements RecordDAO {
 				t.rollback();
 			}
 			return null;
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -97,8 +102,7 @@ public class RecordDAOImpl implements RecordDAO {
 				t.rollback();
 			}
 			return null;
-		}
-		finally {
+		} finally {
 			session.close();
 		}
 	}
@@ -112,11 +116,10 @@ public class RecordDAOImpl implements RecordDAO {
 				Session session = factory.openSession();
 				t = session.beginTransaction();
 
-
 				Item item = itemDAO.getByName(record.getItemname());
 				if (item == null) {
 					return false;
-					//raise itemNotFoundException
+					// raise itemNotFoundException
 				} else {
 					record.setItem(item);
 					if (record.getAction().equals("added")) {
@@ -138,10 +141,10 @@ public class RecordDAOImpl implements RecordDAO {
 			if (t != null) {
 				t.rollback();
 			}
-			//raise hibernate exception
+			// raise hibernate exception
 			return false;
 		}
-	
+
 	}
 
 }

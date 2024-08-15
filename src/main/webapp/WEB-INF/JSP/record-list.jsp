@@ -1,5 +1,7 @@
 <%@page import="com.Model.Record"%>
 <%@page import="java.util.List"%>
+<%@page errorPage="error.jsp"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
