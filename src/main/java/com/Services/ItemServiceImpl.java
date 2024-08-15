@@ -35,11 +35,5 @@ public class ItemServiceImpl implements ItemService {
 		return itemDAO.update(item);
 	}
 
-	@Override
-	public boolean deleteItem(int id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 }

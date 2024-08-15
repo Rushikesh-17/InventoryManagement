@@ -98,7 +98,7 @@ public class ItemController extends HttpServlet {
             throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-    	int quantity = Integer.parseInt( request.getParameter("quantity"));
+        int quantity=0;
     	String measure = request.getParameter("measure");;
     	String category = request.getParameter("category");;
 

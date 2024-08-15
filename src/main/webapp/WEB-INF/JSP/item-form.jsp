@@ -36,7 +36,6 @@
         <input type="text" id="name" name="name" value="${item.name}" required><br>      
         <label for="name">Measure:</label>
         <input type="text" id="measure" name="measure" value="${item.measure}" required><br>
-        
         <label for="name">category:</label>
         <input type="text" id="category" name="category" value="${item.category}" required><br>
         <input type="submit" name="submit">

@@ -14,6 +14,4 @@ public interface ItemService {
 
 	boolean updateItem(Item item);
 
-	boolean deleteItem(int id);
-
 }

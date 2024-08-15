@@ -86,6 +86,8 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public boolean update(Item item) {
 		Transaction transaction = null;
+		int quantity = getById(item.getId()).getQuantity();
+		item.setQuantity(quantity);
 		try {
 			Session session = factory.openSession();
 			transaction = session.beginTransaction();
