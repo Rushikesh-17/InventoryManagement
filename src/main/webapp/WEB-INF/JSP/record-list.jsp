@@ -50,6 +50,7 @@
 		</table>
 		<h4>
 			<a href="records/new">Add New Record</a> 
+			<a href="records/fileUpload">Add file</a> 
 		</h4>
 	</div>
 

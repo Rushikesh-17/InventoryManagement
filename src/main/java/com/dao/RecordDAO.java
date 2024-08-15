@@ -9,6 +9,7 @@ public interface RecordDAO {
 	boolean add(Record record);
     Record getById(int id);
     List<Record> getAll();
+	boolean addAll(List<Record> records);
 
 
 }

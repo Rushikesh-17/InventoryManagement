@@ -11,6 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<%@include file="navbar.jsp"  %>
+
     <div class="container mt-5">
         <h2 class="mb-4">Add Record</h2>
         <form action="insert">

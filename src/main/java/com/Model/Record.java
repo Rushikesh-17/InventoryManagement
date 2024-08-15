@@ -7,21 +7,40 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.poiji.annotation.ExcelCellName;
+import com.poiji.annotation.ExcelSheet;
+
 @Entity
 @SequenceGenerator(name="RECORD_SEQ", sequenceName="record_sequence")
+@ExcelSheet("Records")
 public class Record {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "RECORD_SEQ")
 	private int recordId;
 	
+	@ExcelCellName("User")
 	private String user;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Item item;
+
+	@ExcelCellName("Item")
+	private String itemname;
 	
+	public String getItemname() {
+		return itemname;
+	}
+
+	public void setItemname(String itemname) {
+		this.itemname = itemname;
+	}
+
+	
+	@ExcelCellName("Quantity")
 	private int usedQuantity;
 
+	@ExcelCellName("Action")
 	private String action;
 	
 	@Temporal(TemporalType.TIMESTAMP)

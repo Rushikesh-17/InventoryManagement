@@ -1,10 +1,12 @@
 package com.Services;
 
+import java.io.File;
 import java.util.List;
 
 import com.Model.Record;
 import com.dao.RecordDAO;
 import com.dao.RecordDAOImpl;
+import com.util.ExcelDataReader;
 
 public class RecordServiceImpl implements RecordService{
 	
@@ -29,6 +31,17 @@ public class RecordServiceImpl implements RecordService{
 	public List<Record> getAllRecords() {
 		// TODO Auto-generated method stub
 		return recordDAO.getAll();
+	}
+
+	@Override
+	public boolean importRecords(File tempFile) {
+		// TODO Auto-generated method stub
+		
+		List<Record> records =ExcelDataReader.importExcel(tempFile);
+		
+		return recordDAO.addAll(records);
+		
+		
 	}
 
 
