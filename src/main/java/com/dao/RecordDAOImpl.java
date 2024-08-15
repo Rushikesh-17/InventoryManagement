@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -92,7 +93,7 @@ public class RecordDAOImpl implements RecordDAO {
 
 		try {
 			t = session.beginTransaction();
-			ArrayList<Record> record = (ArrayList<Record>) session.createQuery("From Record").list();
+			List<Record> record = session.createQuery("From Record", Record.class).list();
 			t.commit();
 			return record;
 		} catch (HibernateException e) {
@@ -105,6 +106,23 @@ public class RecordDAOImpl implements RecordDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	@Override
+	public List<Record> getPaginatedRecords(int pageNumber) {
+		Session session = factory.openSession();
+		List<Record> records = session.createQuery("from Record", Record.class).setFirstResult((pageNumber - 1) * 10)
+				.setMaxResults(10).list();
+		session.close();
+		return records;
+	}
+
+	@Override
+	public long getRecordCount() {
+		Session session = factory.openSession();
+		long count = (Long) session.createQuery("select count(*) from Record").uniqueResult();
+		session.close();
+		return count;
 	}
 
 	@Override

@@ -11,6 +11,7 @@ public interface ItemDAO {
     boolean update(Item item);
     boolean addOrUpdate(Item item);
 	Item getByName(String name);
+	
 
     
 }

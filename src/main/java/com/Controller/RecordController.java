@@ -16,6 +16,8 @@ import javax.servlet.http.Part;
 
 import com.Model.Item;
 import com.Model.Record;
+import com.Services.ItemService;
+import com.Services.ItemServiceImpl;
 import com.Services.RecordService;
 import com.Services.RecordServiceImpl;
 
@@ -31,6 +33,7 @@ public class RecordController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private RecordService recordService = new RecordServiceImpl();
+	private ItemService itemService = new ItemServiceImpl();
 
 	@Override
 	public void init() throws ServletException {
@@ -58,9 +61,6 @@ public class RecordController extends HttpServlet {
 				break;
 			case "/fileUpload":	
 				showUploadForm(request,response);
-			
-			case "/bulkInsert":
-				bulkInsertRecords(request, response);
 			default:
 				listRecord(request, response);
 				break;
@@ -71,7 +71,24 @@ public class RecordController extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+//		doGet(request, response);
+		String action = request.getPathInfo();
+		if (action == null) {
+			action = "/";
+		}
+
+		try {
+			switch (action) {
+			case "/bulkInsert":
+				bulkInsertRecords(request, response);
+			default:
+				listRecord(request, response);
+				break;
+			}
+		} catch (Exception ex) {
+			throw new ServletException(ex);
+		}
+		
 	}
 
 	private void showUploadForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -89,7 +106,7 @@ public class RecordController extends HttpServlet {
 
 		Part filePart = request.getPart("file");
 		if (filePart == null) {
-			response.getWriter().println("Please select a file to upload");
+//			response.getWriter().println("Please select a file to upload");
 			return;
 		}
 
@@ -100,28 +117,42 @@ public class RecordController extends HttpServlet {
 			recordService.importRecords(tempFile);
 
 			tempFile.delete();
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/record-list.jsp");
-			dispatcher.forward(request, response);
-
 		} catch (Exception e) {
 			e.printStackTrace();
-			response.getWriter().println("Failed to process the file: " + e.getMessage());
+//			response.getWriter().println("Failed to process the file: " + e.getMessage());
 		}
 		response.sendRedirect("list");
-
-
 	}
 
 	private void listRecord(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		List<Record> listRecord = recordService.getAllRecords();
-		request.setAttribute("listRecord", listRecord);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/record-list.jsp");
-		dispatcher.forward(request, response);
+//		List<Record> listRecord = recordService.getAllRecords();
+//		recordService.getRecordCount();
+//		request.setAttribute("listRecord", listRecord);
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/record-list.jsp");
+//		dispatcher.forward(request, response);
+		int pageNumber = 1;
+        int pageSize = 10;
+
+        if (request.getParameter("page") != null) {
+            pageNumber = Integer.parseInt(request.getParameter("page"));
+        }
+
+        List<Record> records = recordService.getPaginatedRecords(pageNumber);
+        long totalRecords = recordService.getRecordCount();
+        int totalPages = (int) Math.ceil((double) totalRecords / pageSize);
+
+        request.setAttribute("listRecord", records);
+        request.setAttribute("currentPage", pageNumber);
+        request.setAttribute("totalPages", totalPages);
+
+        request.getRequestDispatcher("/WEB-INF/JSP/record-list.jsp").forward(request, response);
 	}
 
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		List<Item> listRecord = itemService.getAllItems();
+		request.setAttribute("listItems", listRecord);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/JSP/record-form.jsp");
 		dispatcher.forward(request, response);
 	}

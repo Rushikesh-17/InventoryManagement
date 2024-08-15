@@ -1,3 +1,5 @@
+<%@page import="com.Model.Item"%>
+<%@page import="java.util.List"%>
 <%@page import="com.Model.Record"%>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -25,7 +27,15 @@
 
             <div class="mb-3">
                 <label for="itemName" class="form-label">Item:</label>
-                <input type="text" class="form-control" id="itemName" name="itemName" value="${record.itemName}" required>
+                <select class="form-select" id="itemName" name="itemName"  required >
+                    <option value="" disabled="disabled">Select Item Name</option>
+                   	<% 	
+                   		List<Item> Items = (List<Item>) request.getAttribute("listItems");
+                   		for(Item i : Items){
+                   	%>
+                   		<option value=<%=i.getName() %> ><%=i.getName()%></option>
+                   	<%}%>
+                </select>
             </div>
 
             <div class="mb-3">

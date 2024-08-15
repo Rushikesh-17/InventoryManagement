@@ -10,7 +10,7 @@
 
 	<%@include file="navbar.jsp"  %>
 	<form action="bulkInsert"  method="post" enctype="multipart/form-data">
-    <input type="file" name="file" accept=".xls,.xlsx,.csv">
+    <input type="file" name="file" accept=".xls,.xlsx,.csv" required="required">
     <input type="submit" value="Upload Excel File">
 </form>
 

@@ -10,6 +10,8 @@ public interface RecordDAO {
     Record getById(int id);
     List<Record> getAll();
 	boolean addAll(List<Record> records);
+	List<Record> getPaginatedRecords(int pageNumber);
+	long getRecordCount();
 
 
 }

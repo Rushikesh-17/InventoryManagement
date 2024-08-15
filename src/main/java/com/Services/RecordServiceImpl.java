@@ -32,6 +32,13 @@ public class RecordServiceImpl implements RecordService{
 		// TODO Auto-generated method stub
 		return recordDAO.getAll();
 	}
+	
+	@Override
+	public List<Record> getPaginatedRecords(int pageNo) {
+		return recordDAO.getPaginatedRecords(pageNo);
+	}
+	
+	
 
 	@Override
 	public boolean importRecords(File tempFile) {
@@ -40,9 +47,15 @@ public class RecordServiceImpl implements RecordService{
 		List<Record> records =ExcelDataReader.importExcel(tempFile);
 		
 		return recordDAO.addAll(records);
-		
-		
 	}
 
+	@Override
+	public long getRecordCount() {
+		// TODO Auto-generated method stub
+		return recordDAO.getRecordCount();
+	}
+
+
+	
 
 }

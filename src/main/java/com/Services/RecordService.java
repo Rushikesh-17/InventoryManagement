@@ -12,8 +12,12 @@ public interface RecordService {
 	Record  getRecordById(int id);
 
 	List<Record> getAllRecords();
-
+	
 	boolean importRecords(File tempFile);
+
+	long getRecordCount();
+
+	List<Record> getPaginatedRecords(int pageNo);
 
 
 

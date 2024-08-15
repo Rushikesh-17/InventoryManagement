@@ -16,7 +16,7 @@
 	rel="stylesheet">
 </head>
 <body>
-	<%@include file="navbar.jsp"  %>
+	<%@include file="navbar.jsp"%>
 
 	<div class="container mt-5">
 		<h2 class="mb-4">Records Management</h2>
@@ -51,9 +51,60 @@
 			</tbody>
 		</table>
 		<h4>
-			<a href="records/new">Add New Record</a> 
-			<a href="records/fileUpload">Add file</a> 
+			<a href="records/new">Add New Record</a> <a href="records/fileUpload">Add
+				file</a>
 		</h4>
+		<!-- Pagination -->
+		<nav aria-label="Page navigation example">
+			<ul class="pagination justify-content-center">
+				<%
+				// Retrieve pagination attributes from the request
+				int currentPage = (int) request.getAttribute("currentPage");
+				int totalPages = (int) request.getAttribute("totalPages");
+
+				// Previous button
+				if (currentPage > 1) {
+				%>
+				<li class="page-item"><a class="page-link"
+					href="records?page=<%=currentPage - 1%>">Previous</a></li>
+				<%
+				} else {
+				%>
+				<li class="page-item disabled"><a class="page-link" href="#">Previous</a>
+				</li>
+				<%
+				}
+
+				// Page numbers
+				for (int i = 1; i <= totalPages; i++) {
+				if (i == currentPage) {
+				%>
+				<li class="page-item active"><a class="page-link" href="#"><%=i%></a>
+				</li>
+				<%
+				} else {
+				%>
+				<li class="page-item"><a class="page-link"
+					href="records?page=<%=i%>"><%=i%></a></li>
+				<%
+				}
+				}
+
+				// Next button
+				if (currentPage < totalPages) {
+				%>
+				<li class="page-item"><a class="page-link"
+					href="records?page=<%=currentPage + 1%>">Next</a></li>
+				<%
+				} else {
+				%>
+				<li class="page-item disabled"><a class="page-link" href="#">Next</a>
+				</li>
+				<%
+				}
+				%>
+			</ul>
+		</nav>
 	</div>
 
 	<!-- Bootstrap JS (optional, for certain Bootstrap features) -->
